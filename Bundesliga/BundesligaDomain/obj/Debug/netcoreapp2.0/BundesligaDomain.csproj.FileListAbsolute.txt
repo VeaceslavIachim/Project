@@ -1,0 +1,9 @@
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\bin\Debug\netcoreapp2.0\BundesligaDomain.deps.json
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\bin\Debug\netcoreapp2.0\BundesligaDomain.dll
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\bin\Debug\netcoreapp2.0\BundesligaDomain.pdb
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.csprojResolveAssemblyReference.cache
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.csproj.CoreCompileInputs.cache
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.AssemblyInfoInputs.cache
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.AssemblyInfo.cs
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.dll
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaDomain\obj\Debug\netcoreapp2.0\BundesligaDomain.pdb
