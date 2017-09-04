@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Position>;
+﻿@model IEnumerable<Team>;
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -64,6 +64,13 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
+</div>
+<div>
+    @foreach(var item in Model)
+    {
+        <p>@item.Name</p>
+
+    }
 </div>
 
 

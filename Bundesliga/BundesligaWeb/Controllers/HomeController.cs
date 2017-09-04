@@ -4,15 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BundesligaEF;
+using BundesligaDomain;
 
 namespace BundesligaWeb.Controllers
 {
     public class HomeController : Controller
     {
+        private IRepository<Team> _repository;
+
+        public HomeController(IRepository<Team> repository)
+        {
+            _repository = repository;
+        }
         public IActionResult Index()
         {
-            var context = new BundesligaContext();
-            var positions = context.Positions;
+            var positions = _repository.Get();
             return View(positions);
         }
 

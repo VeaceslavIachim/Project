@@ -5,10 +5,10 @@ namespace BundesligaEF
 {
     public class BundesligaContext:DbContext
     {
-        //public BundesligaContext(DbContextOptions<BundesligaContext> options) : base(options)
-        //{
+        public BundesligaContext(DbContextOptions<BundesligaContext> options) : base(options)
+        {
 
-        //}
+        }
 
 
         public DbSet<Player> Players { get; set; }
@@ -21,11 +21,11 @@ namespace BundesligaEF
         public DbSet<Standings> Standings { get; set; }
         public DbSet<Team> Teams { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer("Server=.;Initial Catalog=Bundesliga;Integrated Security=true;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    base.OnConfiguring(optionsBuilder);
+        //    optionsBuilder.UseSqlServer("Server=.;Initial Catalog=Bundesliga;Integrated Security=true;");
+        //}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

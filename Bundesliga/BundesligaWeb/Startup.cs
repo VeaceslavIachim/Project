@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using BundesligaEF;
+using BundesligaDomain;
+using Microsoft.EntityFrameworkCore;
 
 namespace BundesligaWeb
 {
@@ -28,6 +31,9 @@ namespace BundesligaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+
+            services.AddScoped<IRepository<Team>,Repository<Team>>();
+            services.AddDbContext<BundesligaContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddMvc();
         }
 
