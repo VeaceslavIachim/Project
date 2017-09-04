@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BundesligaDomain", "Bundesl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BundesligaEF", "BundesligaEF\BundesligaEF.csproj", "{3EB7C395-A2B4-49FD-888B-BE52512F90D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BundesligaWeb", "BundesligaWeb\BundesligaWeb.csproj", "{F1D1409F-7914-4510-AF5E-213585E51159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BundesligaWeb", "BundesligaWeb\BundesligaWeb.csproj", "{F1D1409F-7914-4510-AF5E-213585E51159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -36,7 +36,7 @@ namespace BundesligaEF
             modelBuilder.Entity<Match>()
                 .HasOne(x => x.AwayTeam)
                 .WithMany(x => x.AwayMatches);
-            //modelBuilder.Entity<Team>().HasMany(x => x.Matches).WithOne();
+           
         }
     }
 }

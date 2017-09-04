@@ -9,8 +9,12 @@ namespace BundesligaDomain
 {
     public class Team:Entity
     {
-        public virtual string Name { get; set; }
-        public virtual League League { get; set; }
+        public  string Name { get; set; }
+
+        public int LeagueId { get; set; }
+        public  League League { get; set; }
+
+
         public virtual IList<Player> Players { get; set; }
         public virtual IList<Coach> Coaches { get; set; }
 

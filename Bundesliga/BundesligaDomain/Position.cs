@@ -9,8 +9,8 @@ namespace BundesligaDomain
 {
     public class Position:Entity
     {
-        public virtual string Name { get; set; }
-        public virtual IList<Player> Players { get; set; }
+        public string Name { get; set; }
+        public IList<Player> Players { get; set; }
         public Position()
         {
             Players = new List<Player>();

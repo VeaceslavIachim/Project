@@ -10,17 +10,17 @@ namespace BundesligaDomain
     public class Match : Entity
     {
         public int LeagueId { get; set; }
-        public virtual League League { get; set; }
+        public League League { get; set; }
 
         public int HomeTeamId { get; set; }
-        public virtual Team HomeTeam { get; set; }
+        public Team HomeTeam { get; set; }
 
         public int AwayTeamId { get; set; }
-        public virtual Team AwayTeam { get; set; }
+        public Team AwayTeam { get; set; }
 
-        public virtual int HomeTeamScore {get;set;}
-        public virtual int AwayTeamScore { get; set; }
-        public virtual DateTime MatchDate { get; set; }
-        public virtual IList<MatchStatistics> MatchStatistics { get; set; }
+        public int HomeTeamScore {get;set;}
+        public int AwayTeamScore { get; set; }
+        public DateTime MatchDate { get; set; }
+        public IList<MatchStatistics> MatchStatistics { get; set; }
     }
 }

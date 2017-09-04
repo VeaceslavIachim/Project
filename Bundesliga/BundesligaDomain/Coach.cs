@@ -8,13 +8,13 @@ namespace BundesligaDomain
 {
     public class Coach:Entity
     {
-        public virtual string FirstName { get; set; }
-        public virtual string LastName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
 
         public int TeamId { get; set; }
-        public virtual Team Team { get; set; }
+        public Team Team { get; set; }
 
         public int CountryId { get; set; }
-        public virtual Country Country { get; set; }
+        public Country Country { get; set; }
     }
 }

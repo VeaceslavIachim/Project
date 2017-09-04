@@ -8,10 +8,14 @@ namespace BundesligaDomain
 {
     public class Standings:Entity
     {
-        public virtual Team Team { get; set; }
-        public virtual League League { get; set; }
-        public virtual int Goals { get; set; }
-        public virtual int Points { get; set; }
-        public virtual int Year { get; set; }
+        public int TeamId { get; set; }
+        public Team Team { get; set; }
+
+        public int LeagueId { get; set; }
+        public League League { get; set; }
+
+        public int Goals { get; set; }
+        public int Points { get; set; }
+        public int Year { get; set; }
     }
 }

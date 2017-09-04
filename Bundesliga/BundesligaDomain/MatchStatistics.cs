@@ -8,13 +8,17 @@ namespace BundesligaDomain
 {
     public class MatchStatistics:Entity
     {
-        public virtual Player Player { get; set; }
-        public virtual Match Match { get; set; }
-        public virtual int GoalsScored { get; set; }
-        public virtual int MinutesPlayed { get; set; }
-        public virtual int YellowCards { get; set; }
-        public virtual int RedCards { get; set; }
-        public virtual int TotalPasses { get; set; }
-        public virtual int SuccesfullPasses { get; set; }
+        public int PlayerId { get; set; }
+        public Player Player { get; set; }
+
+        public int MatchId { get; set; }
+        public Match Match { get; set; }
+
+        public int GoalsScored { get; set; }
+        public int MinutesPlayed { get; set; }
+        public int YellowCards { get; set; }
+        public int RedCards { get; set; }
+        public int TotalPasses { get; set; }
+        public int SuccesfullPasses { get; set; }
     }
 }
