@@ -1,0 +1,25 @@
+﻿@model BundesligaWeb.ViewModels.TeamViewModel;
+@{
+    ViewData["Title"] = "Team";
+}
+
+<h2>Team</h2>
+<div>
+    <div>
+        <img class="teamImage" src="@Model.Photo"  style="align-content:center"/>
+    </div>
+    <div>
+    <h1 style="text-align:center"> @Model.Name</h1>
+    </div>
+    @foreach (var item in Model.Players)
+    {
+        <a href="../Player/@item.Id">
+            <div class="boxes col-lg-3">
+                <img class="playerImage" src="~/images/image_35166.png" />
+                <span>@item.LastName</span>
+                <span>@item.FirstName</span>
+            </div>
+        </a>
+    }
+</div>
+

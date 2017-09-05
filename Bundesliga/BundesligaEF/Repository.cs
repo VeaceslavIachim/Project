@@ -8,8 +8,8 @@ namespace BundesligaEF
 {
     public class Repository<TEntity> : IRepository<TEntity> where TEntity :class
     {
-        private BundesligaContext _context;
-        private DbSet<TEntity> _dbset;
+        protected BundesligaContext _context;
+        protected DbSet<TEntity> _dbset;
 
         public Repository(BundesligaContext context)
         {
@@ -45,9 +45,8 @@ namespace BundesligaEF
         }
 
         public void Update(TEntity entity)
-        {
-            _dbset.Attach(entity);
-            _context.SaveChanges();
+        {            
+            _context.Update(entity);
         }
     }
 }

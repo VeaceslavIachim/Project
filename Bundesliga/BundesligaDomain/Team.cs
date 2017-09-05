@@ -10,20 +10,21 @@ namespace BundesligaDomain
     public class Team:Entity
     {
         public  string Name { get; set; }
+        public string Photo { get; set; }
 
         public int LeagueId { get; set; }
         public  League League { get; set; }
 
 
-        public virtual IList<Player> Players { get; set; }
-        public virtual IList<Coach> Coaches { get; set; }
+        public IList<Player> Players { get; set; }
+        public IList<Coach> Coaches { get; set; }
 
 
-        public virtual IList<Match> AwayMatches { get; set; }
-        public virtual IList<Match> HomeMatches { get; set; }
+        public IList<Match> AwayMatches { get; set; }
+        public IList<Match> HomeMatches { get; set; }
 
 
-        public virtual IList<Standings> Standings { get; set; }
+        public IList<Standings> Standings { get; set; }
         public Team()
         {
             Players = new List<Player>();

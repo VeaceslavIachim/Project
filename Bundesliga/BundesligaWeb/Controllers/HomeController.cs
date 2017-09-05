@@ -18,8 +18,8 @@ namespace BundesligaWeb.Controllers
         }
         public IActionResult Index()
         {
-            var positions = _repository.Get();
-            return View(positions);
+            
+            return View();
         }
 
         public IActionResult About()

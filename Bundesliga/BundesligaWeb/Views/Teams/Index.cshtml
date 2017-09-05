@@ -1,0 +1,21 @@
+﻿@model IEnumerable<BundesligaDomain.Team>;
+@{
+    ViewData["Title"] = "Teams";
+}
+
+<h2>Teams</h2>
+<div>
+   
+    <table class="table table-hover">
+            @foreach (var item in Model)
+            {
+                
+                <tr onclick="window.document.location='Teams/Team/@item.Id'" style="cursor:pointer">
+                    <td><img src="@item.Photo" alt="Photo" style="width:30px;height:30px"/></td>
+                    <td><h5>@item.Name</h5></td>
+                 </tr>
+            }
+               
+    </table>
+</div>
+

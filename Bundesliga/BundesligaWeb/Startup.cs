@@ -31,8 +31,8 @@ namespace BundesligaWeb
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-
-            services.AddScoped<IRepository<Team>,Repository<Team>>();
+            services.AddScoped<IPlayerRepository, PlayerRepository>();
+            services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             services.AddDbContext<BundesligaContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("Default")));
             services.AddMvc();
         }

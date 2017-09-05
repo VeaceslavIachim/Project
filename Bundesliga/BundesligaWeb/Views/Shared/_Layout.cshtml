@@ -37,6 +37,7 @@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                    <li><a asp-area="" asp-controller="Teams" asp-action="Index">Teams</a></li>
                 </ul>
             </div>
         </div>
@@ -44,9 +45,11 @@
     <div class="container body-content" style="padding-top:20px">
         @RenderBody()
         <hr />
-        <footer>
-            <p>&copy; 2017 - BundesligaWeb</p>
-        </footer>
+        <div id="footer" class="container-fluid" style="padding-bottom:50px">
+            <div class="navbar navbar-inverse navbar-fixed-bottom">
+                <h4 class="text-center text-info"> &copy;Summer Intership 2017</h4>
+            </div>
+        </div>
     </div>
 
     <environment names="Development">
