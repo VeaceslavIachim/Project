@@ -13,7 +13,9 @@ namespace BundesligaEF
         public Team GetTeamDetailsById(int id)
         {
             var team = _dbset.Include(t => t.Players)
-                .Where(t => t.Id == id).FirstOrDefault();
+                .Where(t => t.Id == id)
+                .Include(t=>t.Players)
+                .FirstOrDefault();
 
             return team;
               

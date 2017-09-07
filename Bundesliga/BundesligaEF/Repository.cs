@@ -38,7 +38,7 @@ namespace BundesligaEF
             return _dbset.Find(id);
         }
 
-        public void Insert(TEntity entity)
+        public virtual void Insert(TEntity entity)
         {
             _dbset.Add(entity);
             _context.SaveChanges();

@@ -1,0 +1,17 @@
+﻿@model BundesligaWeb.ViewModels.PlayerDetailsViewModel;
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<div  class="jumbotron col-lg-9" style="box-sizing:inherit">
+    <h2><b>@Model.Name</b></h2>
+    <div class="container">
+        <div class="col-lg-4"><h3><b>@Model.Number</b> </h3><br /><i><label asp-for="Number"></label></i></div>
+        <div class="col-lg-4"><h3><b>@Model.Position</b></h3><br /><i><label asp-for="Position"></label></i></div>
+        <div class="col-lg-4"><h3><b>@Model.Country</b></h3><br /><i><label asp-for="Country"></label></i> </div>
+        <div class="col-lg-4"><h3><b>@Model.Age</b></h3><br /><i><label asp-for="Age"></label></i></div>
+        <div class="col-lg-4"><h3><b>@Model.Height</b></h3><br /><i><label asp-for="Height"></label></i></div>
+
+    </div>
+</div>

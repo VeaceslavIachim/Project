@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using BundesligaDomain;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace BundesligaEF
 {
@@ -12,7 +13,10 @@ namespace BundesligaEF
 
         public Player Player(int id)
         {
-            return _dbset.Where(p => p.Id == id).SingleOrDefault();
+            return _dbset.Where(p => p.Id == id)
+                .Include(p=>p.Position)
+                .Include(p=>p.Country)
+                .SingleOrDefault();
         }
 
         public IEnumerable<Player> TeamPlayers(int id)
