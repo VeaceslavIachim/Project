@@ -1,0 +1,24 @@
+﻿@model IList<BundesligaWeb.ViewModels.TopScorersViewModel>
+@{
+    ViewData["Title"] = "TopScorers";
+}
+
+
+<fieldset>
+    <legend>Top Scorers</legend>
+    <table class="myTable" style="width:100%" >
+        <tr>
+            <th style="border-bottom:3px solid black;">Player</th>
+            <th style="border-bottom:3px solid black; text-align:center">Goals</th>
+        </tr>
+
+            @for (var i=0;i<Model.Count;i++)
+            {
+                <tr style="line-height:3.0; ">                   
+                    <td style="border-bottom:1px solid lightgrey"><b>@(i+1). @Model[i].Player</b></td>
+                    <td style="border-bottom:1px solid lightgrey;text-align:center"><b>@Model[i].Goals</b></td>
+                </tr>
+            }
+
+    </table>
+</fieldset>

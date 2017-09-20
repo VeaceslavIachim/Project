@@ -1,0 +1,16 @@
+﻿@model BundesligaWeb.ViewModels.MatchViewModel
+
+@{
+    ViewData["Title"] = "Match";
+}
+<h2>Add Match</h2>
+<hr />
+<form asp-action="AddMatch">
+
+    @Html.EditorForModel()
+</form>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

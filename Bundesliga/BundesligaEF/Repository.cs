@@ -28,9 +28,9 @@ namespace BundesligaEF
             _context.SaveChanges();
         }
 
-        public IEnumerable<TEntity> Get()
+        public virtual IEnumerable<TEntity> Get()
         {
-            return _dbset.AsNoTracking().ToList();
+            return _dbset.ToList();
         }
 
         public TEntity GetById(int id)
@@ -44,9 +44,19 @@ namespace BundesligaEF
             _context.SaveChanges();
         }
 
+        public void InsertRange(IList<TEntity> values)
+        {
+            _dbset.AddRange(values);
+            _context.SaveChanges();
+        }
+
         public void Update(TEntity entity)
-        {            
-            _context.Update(entity);
+        {     
+            _context.Update(entity);           
+        }
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
         }
     }
 }

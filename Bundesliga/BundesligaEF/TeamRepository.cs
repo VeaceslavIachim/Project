@@ -1,6 +1,7 @@
 ﻿using BundesligaDomain;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace BundesligaEF
 {
@@ -10,6 +11,13 @@ namespace BundesligaEF
         {
             
         }
+
+        public IEnumerable<Team> GetLiguesTeams(int id)
+        {
+            var teams = _dbset.Where(t => t.LeagueId == id).ToList();
+            return teams;
+        }
+
         public Team GetTeamDetailsById(int id)
         {
             var team = _dbset.Include(t => t.Players)
@@ -20,5 +28,6 @@ namespace BundesligaEF
             return team;
               
         }
+        
     }
 }

@@ -1,6 +1,20 @@
 ﻿<environment names="Development">
     <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(function() {
+            jQuery.validator.addMethod("positiveNumber",
+            function (value, element, parameters) {
+                return value>0;
+            });
+
+            jQuery.validator.unobtrusive.adapters.add("positiveNumber", [], function (options) {
+                options.rules.positiveNumber = {};
+                options.messages["positiveNumber"] = options.message;
+            }(jQuery));
+    </script>
 </environment>
 <environment names="Staging,Production">
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.14.0/jquery.validate.min.js"

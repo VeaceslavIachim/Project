@@ -1,101 +1,107 @@
-﻿
+﻿@model IList<BundesligaWeb.Services.NewsViewModel>
 @{
     ViewData["Title"] = "Home Page";
 }
 
-<div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
-    <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-        <li data-target="#myCarousel" data-slide-to="3"></li>
-    </ol>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/germany-norway-world-cup-qualifiers-live-blog-can-ozil-muller-werner-458236.jsp">
-                <img src="~/images/Germany.jpg" alt="Germany" class="img-responsive" style="width:1200px;height:600px" />
-            </a>
+<div style="padding-left:55px">
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <a href=@Model[0].Link>
+                    <img src=@Model[0].ImageSrc alt="News Photo" class="img-responsive" style="width:1200px;height:600px" />
+                </a>
                 <div class="carousel-caption" role="option">
                     <h2>
-                        Germany 6-0 Norway- As it happened
-                   </h2>
-                    
+                        @Model[0].Title
+                    </h2>
+
                 </div>
             </div>
-        <div class="item">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/bayern-munich-arjen-robben-age-just-a-number-for-evergreen-winger-444138.jsp">
-            <img src="~/images/Robben.jpg" alt="Robben" class="img-responsive" style="width:1200px;height:600px" />
-            </a>
-            <div class="carousel-caption" role="option">
-                <h2>
-                    Arjen Robben still rocking Bayern Munich eight years on!!
-                </h2>
+            <div class="item">
+                <a href=@Model[1].Link>
+                    <img src=@Model[1].ImageSrc alt="News Photo" class="img-responsive" style="width:1200px;height:600px" />
+                </a>
+                <div class="carousel-caption" role="option">
+                    <h2>
+                        @Model[1].Title
+                    </h2>
+                </div>
+            </div>
+            <div class="item">
+                <a href=@Model[2].Link>
+                    <img src=@Model[2].ImageSrc alt="Germany Nationl Team" class="img-responsive" style="width:1200px;height:600px" />
+                </a>
+                <div class="carousel-caption" role="option">
+                    <h2>
+                        @Model[2].Title
+                    </h2>
+                </div>
+            </div>
+            <div class="item">
+                <a href=@Model[3].Link>
+                    <img src=@Model[3].ImageSrc alt="Microsoft Azure" class="img-responsive" style="width:1200px;height:600px" />
+                </a>
+                <div class="carousel-caption" role="option">
+                    <h2>
+                        @Model[3].Title
+                    </h2>
+                </div>
             </div>
         </div>
-        <div class="item">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/10-reasons-germany-are-football-s-greatest-force-werner-kimmich-454183.jsp">
-                <img src="~/images/Germany2.jpg" alt="Germany Nationl Team" class="img-responsive" style="width:1200px;height:600px"/>
-            </a>
-            <div class="carousel-caption" role="option">
-                <h2>
-                    10 reasons Germany are football's greatest force!!
-                </h2>
-            </div>
-        </div>
-        <div class="item">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/rb-leipzig-s-timo-werner-mum-insisted-i-finish-school-457856.jsp">
-                <img src="~/images/Werner.jpg" alt="Microsoft Azure" class="img-responsive" style="width:1200px;height:600px"/>
-            </a>
-            <div class="carousel-caption" role="option">
-                <h2>
-                    RB Leipzig's Timo Werner: "My mum insisted I finish high school!"
-                </h2>
-            </div>
-        </div>
+        <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
 </div>
-<div>
-    <ul class="news-list" style="list-style-type:none">
-        <li class="col-md-6">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/introducing-jadon-sancho-borussia-dortmund-england-manchester-city-arsenal-458269.jsp">
-                <img src="~/images/Borusia.jpg" alt="Dortmund new signing" style="width:472px;height:276px" />
-                <h3>Introducing Jadon Sancho, Borussia Dortmund's English history-maker</h3>
-            </a>
-               
-        </li>
-        <li class="col-md-6">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/denis-zakaria-xhaka-pogba-vieira-gladbach-midfield-heartbeat-458266.jsp">
-                <img src="~/images/Gladbach.jpg" alt="Gladbach new signing" style="width:472px;height:276px" />
-                <h3>Denis Xhaka-ria the new heartbeat of the Borussia Mönchengladbach midfield</h3>
-            </a>
+<div style="padding-top:10px">
+    <div class="flex-container">
+        <ul class="news-list" style="list-style-type:none">
+            <li class="col-lg-6">
+                <a href=@Model[4].Link>
+                    <img src=@Model[4].ImageSrc alt="Dortmund new signing" style="width:536px;height:276px" />
+                    <h3>@Model[4].Title</h3>
+                </a>
 
-        </li>
-        <li class="col-md-3">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/vfb-stuttgart-the-baden-wurttemberg-club-oiling-germany-s-football-engine-455030.jsp">
-                <img src="~/images/Stutgart.jpeg" alt="Stutgart school" style="width:313px;height:176px" />
-                <h3>VfB Stuttgart: The Baden-Württemberg club oiling Germany's football engine</h3>
-            </a>
+            </li>
+            <li class="col-lg-6">
+                <a href=@Model[5].Link>
+                    <img src=@Model[5].ImageSrc alt="Gladbach new signing" style="width:536px;height:276px;" />
+                    <h3>@Model[5].Title</h3>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="flex-container">
+        <ul style="list-style-type:none">
+            <li class="col-lg-4">
+                <a href=@Model[6].Link>
+                    <img src=@Model[6].ImageSrc alt="Stutgart school" style="width:353px;height:176px" />
+                    <h3>@Model[6].Title</h3>
+                </a>
 
-        </li>
-        <li class="col-md-3 col-md-offset-1">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/maximilian-johannes-eggestein-brothers-germany-u21-making-history-boateng-kroos-bender-458276.jsp">
-                <img src="~/images/Bremen.jpg" alt="Werder U21 history" style="width:313px;height:176px" />
-                <h3>Bremen's Eggestein brothers making history for Germany U21s</h3>
-            </a>
+            </li>
+            <li class="col-lg-4">
+                <a href=@Model[7].Link>
+                    <img src=@Model[7].ImageSrc alt="Werder U21 history" style="width:353px;height:176px" />
+                    <h3>@Model[7].Title</h3>
+                </a>
 
-        </li>
-        <li class="col-md-3 col-md-offset-1">
-            <a href="http://www.bundesliga.com/en/news/Bundesliga/divock-origi-wolfsburg-pack-leader-liverpool-obama-kenya-458253.jsp">
-                <img src="~/images/Wollfsburg.jpg" alt="Divok Origi" style="width:313px;height:176px" />
-                <h3>Divock Origi, Wolfsburg's natural-born pack leader</h3>
+            </li>
+            <li class="col-lg-4 ">
+                <a href=@Model[8].Link>
+                    <img src=@Model[8].ImageSrc alt="Divok Origi" style="width:353px;height:176px" />
+                    <h3>@Model[8].Title</h3>
             </a>
 
         </li>
@@ -103,6 +109,6 @@
     </ul>
 
 </div>
-
+</div>
 
 

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BundesligaEF;
 using BundesligaDomain;
+using BundesligaWeb.Services;
 
 namespace BundesligaWeb.Controllers
 {
@@ -18,8 +19,10 @@ namespace BundesligaWeb.Controllers
         }
         public IActionResult Index()
         {
+            var news = new NewsService();
+            var newsList = news.GetNews().ToList();
             
-            return View();
+            return View(newsList);
         }
 
         public IActionResult About()

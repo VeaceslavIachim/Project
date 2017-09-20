@@ -1,0 +1,21 @@
+﻿@model IEnumerable<BundesligaWeb.ViewModels.MatchesViewViewModel>
+@{
+    ViewData["Title"] = "Matches";
+}
+
+
+<fieldset>
+    <legend>Matches</legend>
+    <a asp-action="Index" asp-controller="Match">
+        @foreach (var item in Model)
+        {
+            <div class="row" style="padding:3px;display:flex">
+                <span><img src=@item.HomeTeamPhoto style="width:40px;height:40px" /></span>
+                <span style="padding:20px 40px 20px 40px"><b>@item.HomeTeamScore</b></span>
+                <span><b>_</b></span>
+                <span style="padding:20px 40px 20px 40px"><b>@item.AwayTeamScore</b></span>
+                <span><img src=@item.AwayTeamPhoto style="width:40px;height:40px" /></span>
+            </div>
+        }
+    </a>
+</fieldset>

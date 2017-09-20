@@ -18,7 +18,7 @@ namespace BundesligaWeb.Controllers
         [HttpGet("{id}")]
         public IActionResult Index(int id=2)
         {
-            var player = _repository.Player(id);
+            var player = _repository.GetPlayerDetails(id);
 
             var vm = new PlayerDetailsViewModel();
             vm.Name = $"{player.LastName} {player.FirstName}";

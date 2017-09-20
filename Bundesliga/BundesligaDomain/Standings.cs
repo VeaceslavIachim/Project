@@ -14,6 +14,7 @@ namespace BundesligaDomain
         public int LeagueId { get; set; }
         public League League { get; set; }
 
+        public int Games { get; set; }
         public int Goals { get; set; }
         public int Points { get; set; }
         public int Year { get; set; }

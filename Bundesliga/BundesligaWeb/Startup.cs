@@ -10,31 +10,36 @@ using Microsoft.Extensions.Logging;
 using BundesligaEF;
 using BundesligaDomain;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BundesligaWeb
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddScoped<IMatchStatisticsRepository, MatchStatisticsRepository>();
+            services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IleagueRepository, LeagueRepository>();
+            services.AddScoped<IStandingsRepository, StandingsRepository>();
+            services.AddScoped<IMatchRepository, MatchRespository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped(typeof(IRepository<>),typeof(Repository<>));
             services.AddDbContext<BundesligaContext>(options=>options.UseSqlServer(Configuration.GetConnectionString("Default")));
-            services.AddMvc();
+            services.AddDbContext<BundesligaIdentityContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Default")));
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<BundesligaIdentityContext>()
+                .AddDefaultTokenProviders();
+            services.AddMvc(options=>options.MaxModelValidationErrors=3);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -54,7 +59,7 @@ namespace BundesligaWeb
             }
 
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

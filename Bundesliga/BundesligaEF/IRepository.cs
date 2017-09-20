@@ -9,8 +9,10 @@ namespace BundesligaEF
         IEnumerable<TEntity> Get();
         TEntity GetById(int id);
         void Insert(TEntity entity);
+        void InsertRange(IList<TEntity> values);
         void Delete(int id);
         void Delete(TEntity entity);
         void Update(TEntity entity);
+        void SaveChanges();
     }
 }

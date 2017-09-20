@@ -1,0 +1,93 @@
+﻿@model IEnumerable<BundesligaWeb.ViewModels.MatchesViewViewModel>
+@using BundesligaDomain
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+    ViewData["trash"] = "some trash";
+}
+
+<h2>Index</h2>
+
+@if (SignInManager.IsSignedIn(User))
+{
+   <a asp-controller="Match" asp-action="AddMatch" class="btn btn-success">Add New Match</a>
+}
+
+
+
+<table class="table" style="text-align:center">
+    <thead>
+        <tr  >
+                <th class="th-Matches">
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.HomeTeam)
+                </th>
+                <th class="th-Matches">
+                    @Html.DisplayNameFor(model => model.HomeTeamPhoto)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.HomeTeamScore)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.AwayTeamScore)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.AwayTeamPhoto)
+                </th>
+                <th style="text-align:center"> 
+                    @Html.DisplayNameFor(model => model.AwayTeam)
+                </th>
+                <th style="text-align:center">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)                             
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.HomeTeam)          
+            </td>
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.HomeTeamPhoto)" style="height:20px;width:20px"/>                
+            </td>
+            <td style="border:3px solid black">
+                @Html.DisplayFor(modelItem => item.HomeTeamScore)
+            </td>
+            <td style="border:3px solid black">
+                @Html.DisplayFor(modelItem => item.AwayTeamScore)
+            </td>
+
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.AwayTeamPhoto)" style="height:20px;width:20px" />                
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.AwayTeam)
+            </td>               
+            <td>
+                @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                <a asp-controller="Match" asp-action="Details" class="btn btn-success">Details</a>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <a asp-controller="Match" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>                     
+                    <a asp-controller="Match" asp-action="Delete" class="btn btn-success">Delete</a>
+                    <a asp-controller="Match" asp-action="AddStatistic" asp-route-id="@item.Id" class="btn btn-success">Statistic</a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -77,6 +77,17 @@ textarea {
 .flex-container > a > div {
     justify-content: space-around
 }
+.flex-container > ul > li {
+        justify-content: space-around
+    }
 .container > div {
     justify-content:space-around
 }
+
+.input-number{
+    width:150px
+}
+.table .th-Matches{
+    text-align:center
+}
+

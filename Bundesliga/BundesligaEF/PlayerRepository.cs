@@ -11,7 +11,7 @@ namespace BundesligaEF
         {
         }
 
-        public Player Player(int id)
+        public Player GetPlayerDetails(int id)
         {
             return _dbset.Where(p => p.Id == id)
                 .Include(p=>p.Position)
@@ -19,7 +19,7 @@ namespace BundesligaEF
                 .SingleOrDefault();
         }
 
-        public IEnumerable<Player> TeamPlayers(int id)
+        public IEnumerable<Player> GetTeamPlayers(int id)
         {
             return _dbset.Where(p => p.TeamId == id).ToList();
         }

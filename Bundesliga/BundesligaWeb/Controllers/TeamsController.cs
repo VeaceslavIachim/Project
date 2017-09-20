@@ -11,19 +11,23 @@ namespace BundesligaWeb.Controllers
     {
         private IRepository<Team> _repository;
         private IPlayerRepository _playerRepository;
+        private ITeamRepository _teamRepository;
 
         public TeamsController(
             IRepository<Team> repository,
-            IPlayerRepository playerRepository)
+            IPlayerRepository playerRepository,
+            ITeamRepository teamRepository)
         {
             _repository = repository;
             _playerRepository = playerRepository;
+            _teamRepository = teamRepository;
         }
 
         [HttpGet]
-        public IActionResult Index()
+        public IActionResult Index(int id)
         {
-            var teams = _repository.Get();
+            var teams = _teamRepository.GetLiguesTeams(id);
+
             return View(teams);
         }
 
@@ -34,7 +38,7 @@ namespace BundesligaWeb.Controllers
             var vm = new TeamViewModel();
             vm.Name = team.Name;
             vm.Photo = team.Photo;
-            vm.Players = _playerRepository.TeamPlayers(id).Select(x => new PlayerViewModel
+            vm.Players = _playerRepository.GetTeamPlayers(id).Select(x => new PlayerViewModel
             {
                 Id = x.Id,
                 FirstName = x.FirstName,

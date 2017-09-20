@@ -1,0 +1,16 @@
+﻿@model BundesligaWeb.ViewModels.MatchViewModel
+
+@{
+    ViewData["Title"] = "EditMatch";
+}
+
+<h2>Add Match</h2>
+<hr />
+<form asp-action="Edit">
+@Html.EditorForModel()
+</form>
+
+<div>
+
+    <a asp-action="Index">Back to List</a>
+</div>

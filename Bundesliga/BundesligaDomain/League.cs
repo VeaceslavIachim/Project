@@ -12,6 +12,7 @@ namespace BundesligaDomain
 
         public int CountryId { get; set; }
         public Country Country { get; set; }
+        public string Photo { get; set; }
 
         public IList<Team> Teams { get; set; }
         public IList<Match> Matches { get; set; }
