@@ -6,25 +6,38 @@
 @inject UserManager<ApplicationUser> UserManager
 
 @{
-    ViewData["Title"] = "Index";
-    ViewData["trash"] = "some trash";
+    ViewData["Title"] = "Matches";
 }
 
-<h2>Index</h2>
+<h2>All Matches</h2>
 
 @if (SignInManager.IsSignedIn(User))
 {
    <a asp-controller="Match" asp-action="AddMatch" class="btn btn-success">Add New Match</a>
 }
+<br><br>
+
+<form asp-action="Matches" asp-controller="Match" >
+    <p>
+        Week:<select name="week">
+            <option></option>
+            <option id="value" value="1">1</option>
+            <option id="value" value="2">2</option>
+            <option id="value" value="3">3</option>
+            <option id="value" value="4">4</option>
+            <option id="value" value="5">5</option>
+        </select>
+        <br><br>
+        <input type="submit" name="Submit" />
+    </p>
+
+</form>
 
 
 
 <table class="table" style="text-align:center">
     <thead>
         <tr  >
-                <th class="th-Matches">
-                    @Html.DisplayNameFor(model => model.Id)
-                </th>
                 <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.HomeTeam)
                 </th>
@@ -51,20 +64,17 @@
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)                             
-            </td>
+        <tr>           
             <td>
                @Html.DisplayFor(modelItem => item.HomeTeam)          
             </td>
             <td>
                 <img src="@Html.DisplayFor(modelItem => item.HomeTeamPhoto)" style="height:20px;width:20px"/>                
             </td>
-            <td style="border:3px solid black">
+            <td style="border:3px solid lightgrey">
                 @Html.DisplayFor(modelItem => item.HomeTeamScore)
             </td>
-            <td style="border:3px solid black">
+            <td style="border:3px solid lightgrey">
                 @Html.DisplayFor(modelItem => item.AwayTeamScore)
             </td>
 
@@ -83,7 +93,7 @@
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <a asp-controller="Match" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-success">Edit</a>                     
-                    <a asp-controller="Match" asp-action="Delete" class="btn btn-success">Delete</a>
+                    <a asp-controller="Match" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-success">Delete</a>
                     <a asp-controller="Match" asp-action="AddStatistic" asp-route-id="@item.Id" class="btn btn-success">Statistic</a>
                 }
             </td>
@@ -91,3 +101,5 @@
 }
     </tbody>
 </table>
+
+      

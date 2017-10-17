@@ -8,142 +8,92 @@ using BundesligaEF;
 using BundesligaWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using BundesligaServices.Interfaces;
+using AutoMapper;
+using BundesligaServices.DTO;
 
 namespace BundesligaWeb.Controllers
 {
     [Route("[controller]")]
     public class MatchController : Controller
     {
-        private IRepository<Team> _repository;
-        private IMatchRepository _matchRepository;
-        private IPlayerRepository _playerRepository;
-        private IRepository<MatchStatistics> _statisticsRepository;
-        private IStandingsRepository _standingsRepository;
+        private IMatchServices _matchServices;
+        
 
-        public MatchController(IRepository<Team> repository,
-            IMatchRepository matchRepository, 
-            IPlayerRepository playerRepository,
-            IRepository<MatchStatistics> statisticsRepository,
-            IStandingsRepository standingsRepository)
+        public MatchController(IMatchServices matchServices)
         {
-            _repository = repository;
-            _matchRepository = matchRepository;
-            _playerRepository = playerRepository;
-            _statisticsRepository = statisticsRepository;
-            _standingsRepository = standingsRepository;
+            _matchServices = matchServices;
+           
         }
         [HttpGet("Matches")]      
         public IActionResult Index()
         {
-            var match = _matchRepository.Get();
-            var vm = new List<MatchesViewViewModel>();
-            vm = match.Select(m => new MatchesViewViewModel
-            {
-                Id = m.Id,
-                HomeTeam = m.HomeTeam.Name,
-                HomeTeamPhoto = m.HomeTeam.Photo,
-                HomeTeamScore = m.HomeTeamScore,
-                AwayTeam = m.AwayTeam.Name,
-                AwayTeamPhoto = m.AwayTeam.Photo,
-                AwayTeamScore = m.AwayTeamScore,
-                Date = m.MatchDate
+            var matches = _matchServices.GetAllMatches();
+            var vm = Mapper.Map<List<MatchesViewViewModel>>(matches);
+           
+            return View(vm);
+        }
 
-            }).ToList();
+        [HttpPost("Matches")]
+        public IActionResult Index(int week)
+        {
+            var weekMatches = _matchServices.GetMatchesByWeek(week);
+            var vm = Mapper.Map<List<MatchesViewViewModel>>(weekMatches);
 
             return View(vm);
         }
+
+
         [HttpGet("AddMatch")]      
         [Authorize]
         public IActionResult AddMatch()
         {
-            var teams = _repository.Get();
-            var vm = new MatchViewModel();
-            vm.Teams = teams.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name }).ToList();
-
+            var match = _matchServices.GetDataForMatch();
+            var vm = Mapper.Map<MatchViewModel>(match);
 
             return View(vm);
         }
+
+
         [HttpPost("AddMatch")]
         public IActionResult AddMatch(MatchViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                var match = new Match();
-                match.LeagueId = vm.LeagueId;
-                match.HomeTeamId = vm.HomeTeamId;
-                match.AwayTeamId = vm.AwayTeamId;
-                match.HomeTeamScore = vm.HomeTeamScore;
-                match.AwayTeamScore = vm.AwayTeamScore;
-                match.MatchDate = vm.MatchDate;
-                _matchRepository.Insert(match);
+                var matchDTO = Mapper.Map<MatchDTO>(vm);              
+                var id=_matchServices.SaveMatch(matchDTO);             
 
-                return RedirectToAction("AddStatistic", new { id = match.Id });
+                return RedirectToAction("AddStatistic", new { id =id });
             }
             return View(vm);
-            //return RedirectToAction($"AddStatistic({vm.Id})");
+           
         }
+
+
         [HttpGet("{id}/statistics")]    
         [Authorize]
         public IActionResult AddStatistic(int id)
         {
-            var match = _matchRepository.GetById(id);
-            var homeTeamPlayers = _playerRepository.GetTeamPlayers(match.HomeTeamId);
-            var awayTeamPlayers = _playerRepository.GetTeamPlayers(match.AwayTeamId);
-
-            var vm = new MatchStatisticsViewModel();
-            vm.MatchId = id;
-            vm.HomePlayers = homeTeamPlayers
-                .Select(item => new SelectListItem
-                {
-                    Value = item.Id.ToString(),
-                    Text = $"{item.FirstName} {item.LastName}"
-                })
-                .ToList();
-
-            vm.AwayPlayers = awayTeamPlayers
-               .Select(item => new SelectListItem
-               {
-                   Value = item.Id.ToString(),
-                   Text = $"{item.FirstName} {item.LastName}"
-               })
-               .ToList();
-
+            var statistics = _matchServices.GetDataForStatistics(id);
+            var vm = Mapper.Map<MatchStatisticsViewModel>(statistics);
             return View(Enumerable.Repeat(vm, 28).ToList());
         }
         [HttpPost("{id}/statistics")]
-       public IActionResult AddStatistic(int id,IList<MatchStatisticsViewModel> vm)
+       public IActionResult AddStatistic(IList<MatchStatisticsViewModel> vm)
         {
-
-            var matchStatistics = vm.Select(m => new MatchStatistics
-            {
-                PlayerId = m.PlayerId,
-                MatchId = id,
-                GoalsScored = m.GoalsScored,
-                MinutesPlayed = m.MinutesPlayed,
-                YellowCards = m.YellowCards,
-                RedCards = m.RedCards,
-                TotalPasses = m.TotalPasses,
-                SuccesfullPasses = m.SuccesfullPasses
-            }).ToList();
-
-            _statisticsRepository.InsertRange(matchStatistics);
+            var statistics = Mapper.Map<IList<MatchStatisticsDTO>>(vm);
+            _matchServices.SaveStatistics(statistics);           
+            
             return RedirectToAction("AddMatch");
         }
+
 
         [HttpGet("edit/{id}")]
         public IActionResult Edit(int id)
         {
-            var match = _matchRepository.GetById(id);
-            _standingsRepository.EditStandings(match);
-            var teams = _repository.Get();           
-            var vm = new MatchViewModel();
-            vm.Id = id;
-            vm.HomeTeamScore = match.HomeTeamScore;
-            vm.AwayTeamScore = match.AwayTeamScore;
-            vm.MatchDate = match.MatchDate;
-            vm.HomeTeamId = match.HomeTeamId;
-            vm.AwayTeamId = match.AwayTeamId;
-            vm.Teams = teams.Select(item => new SelectListItem { Value = item.Id.ToString(), Text = item.Name }).ToList();
+            var matchForEdit = _matchServices.GetDataForEdit(id);
+            var vm = Mapper.Map<MatchViewModel>(matchForEdit);
+
 
             return View(vm);
 
@@ -154,16 +104,8 @@ namespace BundesligaWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var match = _matchRepository.GetById(vm.Id);
-                _matchRepository.Update(match);
-                match.LeagueId = vm.LeagueId;
-                match.HomeTeamId = vm.HomeTeamId;
-                match.AwayTeamId = vm.AwayTeamId;
-                match.HomeTeamScore = vm.HomeTeamScore;
-                match.AwayTeamScore = vm.AwayTeamScore;
-                match.MatchDate = vm.MatchDate;
-                _matchRepository.EditStandings(match);
-               // _matchRepository.SaveChanges();
+                var matchDTO = Mapper.Map<MatchDTO>(vm);
+                _matchServices.EditMatch(matchDTO);
 
                 return RedirectToAction("Index");
             }
@@ -172,5 +114,11 @@ namespace BundesligaWeb.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            _matchServices.DeleteMatch(id);
+            return RedirectToAction("Index");
+        }
     }
 }

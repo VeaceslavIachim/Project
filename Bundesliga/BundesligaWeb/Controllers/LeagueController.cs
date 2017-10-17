@@ -5,33 +5,30 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BundesligaEF;
 using BundesligaWeb.ViewModels;
+using BundesligaServices;
+using BundesligaServices.Interfaces;
+using AutoMapper;
 
 namespace BundesligaWeb.Controllers
 {
     [Route("[controller]")]
     public class LeagueController : Controller
     {
-        private IleagueRepository _leagueRepository;
+       
+        private ILeagueServices _leagueServices;
 
-        public LeagueController(IleagueRepository leagueRepository)
+        public LeagueController( ILeagueServices leagueservices)
         {
-            _leagueRepository = leagueRepository;
+            _leagueServices = leagueservices;
         }
         [HttpGet]
         public IActionResult Index()
         {
-            var leagues = _leagueRepository.GetLeagues();
-            var vmList = leagues
-                .Select(item =>new LeagueViewModel
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Country = item.Country.Name,
-                    Photo = item.Photo
-                })
-                .ToList();
-            
-            return View(vmList);
+
+            var leagues = _leagueServices.GetAllLeagues();
+            var vm = Mapper.Map<IEnumerable<LeagueViewModel>>(leagues);           
+
+            return View(vm);
         }
     }
 }

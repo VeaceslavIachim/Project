@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BundesligaEF", "BundesligaE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BundesligaWeb", "BundesligaWeb\BundesligaWeb.csproj", "{F1D1409F-7914-4510-AF5E-213585E51159}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BundesligaServices", "BundesligaServices\BundesligaServices.csproj", "{D194B534-8A51-4AFB-ACFB-D21482867D23}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F1D1409F-7914-4510-AF5E-213585E51159}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1D1409F-7914-4510-AF5E-213585E51159}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1D1409F-7914-4510-AF5E-213585E51159}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D194B534-8A51-4AFB-ACFB-D21482867D23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D194B534-8A51-4AFB-ACFB-D21482867D23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D194B534-8A51-4AFB-ACFB-D21482867D23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D194B534-8A51-4AFB-ACFB-D21482867D23}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

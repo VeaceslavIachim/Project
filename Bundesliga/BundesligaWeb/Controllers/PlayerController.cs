@@ -3,31 +3,26 @@ using BundesligaWeb.ViewModels;
 using BundesligaEF;
 using System;
 using System.Linq;
+using AutoMapper;
+using BundesligaServices.Interfaces;
 
 namespace BundesligaWeb.Controllers
 {
     [Route("[controller]")]
     public class PlayerController : Controller
     {
-        private IPlayerRepository _repository;
+        private IPlayerServices _playerServices;
 
-        public PlayerController(IPlayerRepository repository)
+        public PlayerController(IPlayerServices playerServices)
         {
-            _repository = repository;
+            _playerServices = playerServices;
         }
         [HttpGet("{id}")]
         public IActionResult Index(int id=2)
         {
-            var player = _repository.GetPlayerDetails(id);
+            var player = _playerServices.GetPlayerDetails(id);
+            var vm = Mapper.Map<PlayerDetailsViewModel>(player);
 
-            var vm = new PlayerDetailsViewModel();
-            vm.Name = $"{player.LastName} {player.FirstName}";
-            //vm.LastName = player.LastName;
-            vm.Number = player.Number;
-            vm.Position =player.Position.Name;
-            vm.Country = player.Country.Name;
-            vm.Height = player.Height;
-            vm.Age = (DateTime.Now.Year - player.Age.Year);
             return View(vm);
         }
     }

@@ -1,5 +1,7 @@
-﻿using BundesligaDomain;
+﻿using AutoMapper;
+using BundesligaDomain;
 using BundesligaEF;
+using BundesligaServices.Interfaces;
 using BundesligaWeb.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
@@ -9,41 +11,19 @@ namespace BundesligaWeb.Controllers
     [Route("[controller]")]
     public class TeamsController : Controller
     {
-        private IRepository<Team> _repository;
-        private IPlayerRepository _playerRepository;
-        private ITeamRepository _teamRepository;
+        private ITeamsServices _teamServices;
 
-        public TeamsController(
-            IRepository<Team> repository,
-            IPlayerRepository playerRepository,
-            ITeamRepository teamRepository)
+        public TeamsController(ITeamsServices teamsServices)
         {
-            _repository = repository;
-            _playerRepository = playerRepository;
-            _teamRepository = teamRepository;
+            _teamServices = teamsServices;
         }
-
-        [HttpGet]
-        public IActionResult Index(int id)
-        {
-            var teams = _teamRepository.GetLiguesTeams(id);
-
-            return View(teams);
-        }
-
+        
         [HttpGet("{id}")]
         public IActionResult Team(int id)
         {
-            var team = _repository.GetById(id);
-            var vm = new TeamViewModel();
-            vm.Name = team.Name;
-            vm.Photo = team.Photo;
-            vm.Players = _playerRepository.GetTeamPlayers(id).Select(x => new PlayerViewModel
-            {
-                Id = x.Id,
-                FirstName = x.FirstName,
-                LastName = x.LastName
-            });
+            var team = _teamServices.GetTeamDetails(id);
+            var vm = Mapper.Map<TeamViewModel>(team);
+            
             return View(vm);
         }
 

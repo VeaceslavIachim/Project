@@ -13,3 +13,5 @@ C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\
 C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\Debug\netcoreapp2.0\BundesligaEF.dll
 C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\Debug\netcoreapp2.0\BundesligaEF.pdb
 C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\Debug\netcoreapp2.0\BundesligaDomain.pdb
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\Debug\netcoreapp2.0\BundesligaServices.dll
+C:\Users\veaceslav.iachim\Desktop\Projects\Project\Bundesliga\BundesligaWeb\bin\Debug\netcoreapp2.0\BundesligaServices.pdb

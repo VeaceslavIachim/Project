@@ -1,63 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using BundesligaEF;
 using BundesligaWeb.ViewModels;
 using BundesligaDomain;
+using AutoMapper;
+using BundesligaServices.Interfaces;
 
 namespace BundesligaWeb.Controllers
 {
     [Route("[controller]")]
     public class StandingsController : Controller
     {
-        private IStandingsRepository _standingsRepository;
-        private IRepository<Team> _repository;
-        private IMatchRepository _matchRepository;
-        private IMatchStatisticsRepository _matchStatisticsRepository;
+        private IStandingsServices _standingsServices;
 
-        public StandingsController(IStandingsRepository standingsRepository,
-            IRepository<Team> repository,
-            IMatchRepository matchRepository,
-            IMatchStatisticsRepository matchStatisticsRepository)
-        {
-            _standingsRepository = standingsRepository;
-            _repository = repository;
-            _matchRepository = matchRepository;
-            _matchStatisticsRepository = matchStatisticsRepository;
+        public StandingsController(IStandingsServices standingsServices)
+        {            
+            _standingsServices = standingsServices;
         }
         public IActionResult Index(int id)
         {
-            var standings = _standingsRepository.GetStandingsDetails(id);
-            var matches = _matchRepository.GetPartial();
-            var topscorers = _matchStatisticsRepository.GetTopScorers();
-            var vms = new StandingViewModel {
-                Standings = standings.Select(x => new StandingsViewModel
-                {
-                    Id = x.TeamId,
-                    Team = x.Team.Name,
-                    Goals = x.Goals,
-                    Points = x.Points,
-                    Games = x.Games,
-                    Photo = _repository.GetById(x.TeamId).Photo,
-
-                })
-            .ToList(),
-            Matches = matches.Select(m => new MatchesViewViewModel
-            {
-                HomeTeamPhoto = m.HomeTeam.Photo,
-                AwayTeamPhoto = m.AwayTeam.Photo,
-                HomeTeamScore = m.HomeTeamScore,
-                AwayTeamScore = m.AwayTeamScore
-            }).ToList(),
-            TopScorers=topscorers.Select(t=>new TopScorersViewModel
-            {
-                Player=t.Player,
-                Goals=t.Goals
-            }).ToList()          
-            
-            };
+            var standingDetails = _standingsServices.GetStandingsDetails(id);
+            var vms = Mapper.Map<StandingDetailsViewModel>(standingDetails);
+           
             return View(vms);
         }
     }
